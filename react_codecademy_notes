@@ -1,0 +1,107 @@
+JSX
+	• if JSX expression takes up more than one line, you must wrap it in parenthesis.
+		(
+			<a href="https://www.example.com">
+				<h1>Click me!</h1>
+			</a>
+		);
+
+	• JSX expressions must have exactly ONE outermost element
+		○ the first opening tag and the final closing tag must belong to the same element!!!
+		○ so this won't work....
+			<p>I am a paragraph</p>
+			<p>I, too, am a paragraph</p>
+		○ but this does... (because it's returning a div NOT two p tags)
+			<div>
+				<p>I am a paragraph</p>
+				<p>I, too, am a paragraph</p>
+			</div>
+	• ReactDOM.render()
+		○ First argument -> a JSX expression
+		○ Second argument -> target element for where the JSX expresson should be appended.
+		○ in JS file:
+			ReactDOM.render(<h1d>Render me!</h1>, document.getElementById('app'));
+		○ in HTML file:
+			<body>
+				<main id="app"></main>
+				<other stuff....>
+			</body>
+		○ So 'Render Me!' will be appended to the <main></main> section
+		○ ReactDOM.render() ONLY updates DOMs that have changed
+	• In React, here's what happens wbhen you try to update the DOM
+		1. The entire virtual DOM get updated
+		2. The virtual DOM get compared to what it looked like before you updated it.  React figures out which objects have changed.
+		3. The changed objects, and the changed object ONLY, get updated on the real DOM.
+		4. Changes on the real DOM cause the screen to change.
+	• class v className
+		○ In JS class is a reserved word, so in JSX....class is still a reserved word
+			§ so ----> <h1 class="big">Hey</h1>
+			§ becomes ----> <h1 className="big">Hey</h1>
+		○ Elements:
+			§ self-closing tags in JSX MUST include a final slash
+				□ <br />
+	• Javascript in HTML in JSX(Javascript) Expressions
+		○ Include the curly braces {}
+		○ <h1>{2+3}</h1>
+	• Variable Attributes
+		○ attributes are typically done with variables in JSX
+			§ <img width={sideLength} />
+	• EventListeners
+		○ React is constantly working with event listeners, which makes sense because stuff is happening.
+			§ JSX event listener is a special attribute -> onClick().
+		○ EventListeners attribute name should be:= meaningful (check React docs for events)
+			§ onClick
+			§ onMouseOver
+		○ EventListeners attribute value should be a function
+			§ <img onClick={myFunc} /> :notice NO parentheses on the function call!
+			§ only works if myFunc() is declared somewhere else in the code
+				□ function myFunt() { <do some stuff }
+		○ Naming Conventions
+			§ Handler: what type of event am I listening for?
+				□ "click" -> handleClick()
+				□ "keyPress" -> handleKeyPress()
+				handleHover() { alert('I am something'); }
+			§ Prop or attribute: on plus event type
+				□ listening for a "click" -> onClick
+				□ listening for a "keyPress" -> onKeyPress
+				render() { return <Child onHover={this.handleHover} />; }
+			§ Names like onClick only create event listeners IF they're used on HTML-like JSX elements. Otherwise they're just ordinary prop names.
+	• JSX Conditional
+		○ Ternaries
+		○ && -> makes code run or not run
+			{!judgmental && <li>Nacho Cheez Staight Out e Jar<li>}
+			§ so this code says if !judgmental show the <li>
+			§ !judgmental is just calculated as a boolean true or false somewhere else
+	• Components
+		○ MUST begin with a capital letter
+			§ capital is to distinguish to JSX the difference between a component instance and an HTML tag
+		○ a component Class is NOT a component
+			§ it's a Component producer (component factory)
+			§ each component will come from a Component class
+			§ the code in {<code>} of a Component class are the 'instructions' on what component to build
+		○ logic variable need to be OUT of the class IN the rendor method OUT of the return
+		○ Components should be in their own individual files then imported
+			import {NavBar} from './NavBar.js';
+		○ class components just have access to props????  I don't have to explicitly call them????
+		○ this.props.children
+			§ returns everything between a component's opening and closing JSX tags
+		○ defaultProps
+			§ should be equal to an object -> <ClassName>.defaultProps = {};
+			§ inside of this object write your default values
+				□ <ClassName>.defaultProps = {text: 'yo'};
+	• State
+		○ Two ways for a component to get dynamic information
+		○ Props & State -> aside from these every value used in a component should always stay exactly the same!
+		○ State is NOT passed in.  Components decide their own state!
+		○ state is declared in the constructor
+			this.state = { mood: 'decent' };
+		○ this.setState()
+			§ takes 2 arguments
+				□ an object that will update the component's state
+				□ a callback (will likely never need this)???
+		○ Whenever you define an event handler that uses this...
+			§ ALWAYS add to the constructor function
+				this.methodName = this.methodName.bind(this) 
+			§ When you write a component class method that uses this, you need to bind
+		○ Any time that you call this.setState(), this.setState() AUTOMATICALLY calls .render() as soon as the state has changed.
+this is why you can't call setState inside of render(), because it would call render again, creating an infinite loop!
