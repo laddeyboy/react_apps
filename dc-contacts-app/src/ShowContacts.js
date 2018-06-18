@@ -1,23 +1,32 @@
-import React from 'react';
-
-
+import React from 'react'
 
 class ShowContacts extends React.Component {
- 
-    render() {
+  render () {
+    var contacts = []
+    if (this.props.contacts.length) {
+      contacts = this.props.contacts.map((contact, index) => {
+        console.log('What is contact', contact)
         return (
-            <div>
-            <h2>Here are your contacts:</h2>
-                <label>{this.props.name}</label><br />
-                <label>{this.props.email}</label><br />
-                <label>{this.props.phone}</label><br />
-                <label>{this.props.address}</label><br />
-                <label>{this.props.city}</label><br />
-                <label>{this.props.state}</label><br />
-                <label>{this.props.zip}</label><br />
-            </div>
-        );
+          <div key={index}>
+            <label>{contact.name}</label><br />
+            <label>{contact.email}</label><br />
+            <label>{contact.phone}</label><br />
+            <label>{contact.address}</label><br />
+            <label>{contact.city}</label><br />
+            <label>{contact.state}</label><br />
+            <label>{contact.zip}</label><br />
+          </div>
+        )
+      })
     }
+
+    return (
+      <div>
+        <h2>Here are your contacts:</h2>
+        <ul style={{backgroundColor: 'blue', color: 'white'}}>{contacts}</ul>
+      </div>
+    )
+  }
 }
 
-export default ShowContacts;
+export default ShowContacts

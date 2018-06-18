@@ -23,16 +23,6 @@ class App extends Component {
   updateContact (aContact) {
     var contacts = [...this.state.contacts, aContact]
     this.setState({contacts: contacts})
-    // this.setState({
-    //   name: aContact.name,
-    //   email: aContact.email,
-    //   phone: aContact.phone,
-    //   address: aContact.address,
-    //   city: aContact.city,
-    //   state: aContact.state,
-    //   zip: aContact.zip,
-    //   contacts: aContact
-    // });
   }
 
   render () {
@@ -43,9 +33,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to Josh's React App</h1>
         </header>
         <p className="App-intro">
-          Let's start by putting my shit here first!
+          Let's start by putting stuff here first!
         </p>
-        {console.log('What is contacts array ', this.state.contacts)}
+        {/* {console.log('What is contacts array ', this.state.contacts)} */}
         <NewContactForm {...this.state} onUpdateContact={this.updateContact} />
         <ShowContacts {...this.state} />
       </div>
