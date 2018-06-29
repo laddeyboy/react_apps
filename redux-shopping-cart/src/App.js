@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import './ShoppingCart'
-import './ShoppingInventory'
 import ShoppingCart from './ShoppingCart'
 import ShoppingInventory from './ShoppingInventory'
+import {Provider} from 'react-redux'
+import store from './redux_store'
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      groceryItems: ['Milk', 'Eggs', 'Steak', 'Bread', 'Broccoli', 'Potatoes']
-    }
-  }
+  // constructor (props) {
+  //   super(props)
+  // }
   render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Josh's Squishy Mart</h1>
-        </header>
+      <Provider store={store}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Josh's Squishy Mart</h1>
+          </header>
 
-        <div className="GroceryStore-wrapper">
-          <header>This is the top</header>
-          <div className="Grocery-contents">
-            <ShoppingInventory storeInv={this.state.groceryItems}/>
-            <ShoppingCart />
+          <div className="GroceryStore-wrapper">
+            <header>This is the top</header>
+            <div className="Grocery-contents">
+              <ShoppingInventory />
+              <ShoppingCart />
+            </div>
+            <footer className='total-footer'>Total: $<span>(An Amount)</span></footer>
           </div>
-          <footer className='total-footer'>Total: $<span>(An Amount)</span></footer>
-        </div>
 
-      </div>
+        </div>
+      </Provider>
     )
   }
 }
