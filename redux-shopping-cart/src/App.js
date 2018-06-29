@@ -7,6 +7,12 @@ import ShoppingCart from './ShoppingCart'
 import ShoppingInventory from './ShoppingInventory'
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      groceryItems: ['Milk', 'Eggs', 'Steak', 'Bread', 'Broccoli', 'Potatoes']
+    }
+  }
   render () {
     return (
       <div className="App">
@@ -18,7 +24,7 @@ class App extends Component {
         <div className="GroceryStore-wrapper">
           <header>This is the top</header>
           <div className="Grocery-contents">
-            <ShoppingInventory />
+            <ShoppingInventory storeInv={this.state.groceryItems}/>
             <ShoppingCart />
           </div>
           <footer className='total-footer'>Total: $<span>(An Amount)</span></footer>
