@@ -1,6 +1,10 @@
 var initialState = {
-  userCart: ['nada'],
-  groceryItems: ['Milk', 'Eggs', 'Steak', 'Bread', 'Broccoli', 'Potatoes']
+  userCart: [],
+  // groceryItems: ['Milk', 'Eggs', 'Steak', 'Bread', 'Broccoli', 'Potatoes']
+  groceryItems: [{item: 'Milk', cost: 5.99},
+    {item: 'Eggs', cost: 6.99},
+    {item: 'Steak', cost: 25.00},
+    {item: 'Bread', cost: 3.99}]
 }
 export function groceryStore (state, action) {
   if (state === undefined) {
@@ -8,7 +12,6 @@ export function groceryStore (state, action) {
   }
   switch (action.type) {
     case 'ADD_ITEM_TO_CART':
-      console.log('in redux_reducer.js ADD_ITEM_TO_CART')
       // 1. make copy of the state
       var new_state = {...state}
       new_state.userCart = [...state.userCart]

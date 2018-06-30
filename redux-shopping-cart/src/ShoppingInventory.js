@@ -5,9 +5,15 @@ import {addItem} from './redux_actions'
 import {connect} from 'react-redux'
 
 class ShoppingInventory extends Component {
+  constructor (props) {
+    super(props)
+    this.onAddItem = this.onAddItem.bind(this)
+  }
+
   onAddItem (groceryItem) {
     // groceryItem is an event -> so... groceryItem.target.id = the actual groceryItem
     let newCartItem = groceryItem.target.id
+    // console.log('cartItem', newCartItem)
     this.props.onSubmit(newCartItem)
   }
 
@@ -17,7 +23,7 @@ class ShoppingInventory extends Component {
         <h3>Store Inventory</h3>
         <ul className='GS-inventory'>
           {this.props.groceryItems.map((groceryItem, index) => {
-            return <li key={index}>{groceryItem}<button id={groceryItem}
+            return <li key={index}>{groceryItem.item}<button id={groceryItem.item}
               onClick={this.onAddItem}>
               Add to Cart</button></li>
           })}
@@ -37,7 +43,6 @@ function mapDispatchToProps (dispatch) {
   return {
     // this onSubmit is taking 'data' and calling addItem in ./redux_actions.js
     onSubmit: function (data) {
-      console.log('data is: ', data)
       dispatch(addItem(data))
     }
   }

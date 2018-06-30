@@ -58,6 +58,40 @@
   padding-right: 50px;
 }
 
+.modal {
+  /* this is going to be the darkened area of the page background */
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0; top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-window {
+  background-color: #f4f4f4;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50;
+  margin-top: -150px;
+  margin-left: -150px;
+  z-index: 1;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),
+              0 7px 20px 0 rgba(0,0,0,0.17);
+}
+.modal-close-btn {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+.modal-close-btn:hover, .close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: point;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
