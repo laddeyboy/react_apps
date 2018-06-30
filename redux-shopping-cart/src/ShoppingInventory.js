@@ -4,33 +4,23 @@ import './AddItemModal'
 import {addItem} from './redux_actions'
 import {connect} from 'react-redux'
 
-class ShoppingInventory extends Component {
-  constructor (props) {
-    super(props)
-    this.onAddItem = this.onAddItem.bind(this)
-  }
-
-  onAddItem (groceryItem) {
-    // groceryItem is an event -> so... groceryItem.target.id = the actual groceryItem
-    let newCartItem = groceryItem.target.id
-    // console.log('cartItem', newCartItem)
-    this.props.onSubmit(newCartItem)
-  }
-
-  render () {
-    return (
-      <div style={{border: '1px solid gray', width: '50%'}}>
-        <h3>Store Inventory</h3>
-        <ul className='GS-inventory'>
-          {this.props.groceryItems.map((groceryItem, index) => {
-            return <li key={index}>{groceryItem.item}<button id={groceryItem.item}
-              onClick={this.onAddItem}>
+function ShoppingInventory (props) {
+  return (
+    <div style={{border: '1px solid gray', width: '50%'}}>
+      <h3>Store Inventory</h3>
+      <ul className='GS-inventory'>
+        {props.groceryItems.map((groceryItem, index) => {
+          const clickFn = function (_evt) {
+            console.log('groceryItem', groceryItem)
+            props.onSubmit(groceryItem)
+          }
+          return <li key={index}>{groceryItem.item}<button id={groceryItem.item}
+            onClick={clickFn}>
               Add to Cart</button></li>
-          })}
-        </ul>
-      </div>
-    )
-  }
+        })}
+      </ul>
+    </div>
+  )
 }
 
 function mapStateToProps (state) {

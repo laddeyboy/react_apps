@@ -9,7 +9,7 @@ class ShoppingCart extends Component {
         <h3>My Cart</h3>
         <ul className='GS-inventory'>
           {this.props.userCart.map((cartItem, index) => {
-            return <li key={index}>{cartItem}</li>
+            return <li key={index}>{cartItem.item}</li>
           })}
 
         </ul>
